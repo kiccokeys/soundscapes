@@ -73,20 +73,20 @@
 
 .rangeActive {
   &::-webkit-slider-runnable-track {
-    background-color: #4f46e5;
+    background-color: #3176ad;
   }
 
   &::-webkit-slider-thumb {
-    background-color: #eef2ff;
-    border-color: #a5b4fc;
+    background-color: #e0f2ff;
+    border-color: #93c5fd;
   }
 
   &::-moz-range-track {
-    background-color: #4f46e5;
+    background-color: #3176ad;
   }
 
   &::-moz-range-thumb {
-    background-color: #eef2ff;
-    border-color: #a5b4fc;
+    background-color: #e0f2ff;
+    border-color: #93c5fd;
   }
 }
