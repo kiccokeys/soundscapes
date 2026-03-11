@@ -7,8 +7,7 @@ import { useSoundStore } from '@/stores/sound';
 
 import { Container } from '@/components/container';
 import { StoreConsumer } from '@/components/store-consumer';
-import { Buttons } from '@/components/buttons';
-import { Categories } from '@/components/categories';
+import { Sounds } from '@/components/sounds';
 import { SharedModal } from '@/components/modals/shared';
 import { Toolbar } from '@/components/toolbar';
 import { SnackbarProvider } from '@/contexts/snackbar';
@@ -71,19 +70,17 @@ export function App() {
     return unsubscribe;
   }, [pause, lock, unlock]);
 
-  const allCategories = useMemo(() => {
-    const favorites = [];
+  const allSounds = useMemo(() => {
+    const baseSounds = categories.flatMap(category => category.sounds);
 
-    if (favoriteSounds.length) {
-      favorites.push({
-        icon: <BiSolidHeart />,
-        id: 'favorites',
-        sounds: favoriteSounds as Array<Sound>,
-        title: 'Favorites',
-      });
-    }
+    if (!favoriteSounds.length) return baseSounds;
 
-    return [...favorites, ...categories];
+    const uniqueFavorites = favoriteSounds.filter(
+      (sound): sound is Sound =>
+        !!sound && !baseSounds.find(base => base.id === sound.id),
+    );
+
+    return [...uniqueFavorites, ...baseSounds];
   }, [favoriteSounds, categories]);
 
   return (
@@ -92,8 +89,7 @@ export function App() {
         <MediaControls />
         <Container>
           <div id="app" />
-          <Buttons />
-          <Categories categories={allCategories} />
+          <Sounds functional id="all" sounds={allSounds} />
         </Container>
 
         <Toolbar />

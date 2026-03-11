@@ -1,7 +1,10 @@
 :root {
-  --font-body: 'Inter', sans-serif;
-  --font-heading: 'Inter Tight', sans-serif;
-  --font-display: 'Fraunces', serif;
+  --font-body: 'Geist', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+  --font-heading: 'Geist', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
+  --font-display: 'Geist', system-ui, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', sans-serif;
 
   /* Font Sizes */
   --font-base-size: 1rem;

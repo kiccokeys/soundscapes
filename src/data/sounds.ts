@@ -12,5 +12,5 @@ import type { Categories } from './types';
 export const sounds: {
   categories: Categories;
 } = {
-  categories: [nature, rain, animals, urban, places, transport, things, noise],
+  categories: [nature, rain, animals],
 };

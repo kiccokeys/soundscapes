@@ -45,6 +45,23 @@ const description =
   <body>
     <slot />
 
+    <img
+      alt="Feelbetter logo"
+      class="feelbetter-logo"
+      src="/feelbetterlogo.svg"
+      width="140"
+    />
+
     <Reload client:load />
+
+    <style>
+      .feelbetter-logo {
+        position: fixed;
+        left: 16px;
+        bottom: 16px;
+        opacity: 0.5;
+        height: auto;
+      }
+    </style>
   </body>
 </html>

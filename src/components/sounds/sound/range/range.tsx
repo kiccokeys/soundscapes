@@ -17,7 +17,7 @@ export function Range({ id, label }: RangeProps) {
     <input
       aria-label={`${label} sound volume`}
       autoComplete="off"
-      className={styles.range}
+      className={`${styles.range} ${isSelected ? styles.rangeActive : ''}`}
       disabled={!isSelected}
       max={100}
       min={0}

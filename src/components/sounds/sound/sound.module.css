@@ -7,8 +7,8 @@
   padding: 25px 20px;
   text-align: center;
   cursor: pointer;
-  background: linear-gradient(rgb(24 24 27 / 50%), transparent);
-  border: 1px solid var(--color-neutral-200);
+  background: linear-gradient(rgb(24 24 27 / 85%), transparent);
+  border: 1px solid var(--color-neutral-400);
   border-radius: 12px;
   transition: 0.2s;
 
@@ -105,7 +105,7 @@
   & .label {
     margin-top: 8px;
     font-family: var(--font-heading);
-    font-size: var(--font-sm);
+    font-size: var(--font-xsm);
     font-weight: 600;
     line-height: 1.6;
   }

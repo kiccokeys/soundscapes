@@ -70,3 +70,23 @@
     outline-offset: 0.125rem;
   }
 }
+
+.rangeActive {
+  &::-webkit-slider-runnable-track {
+    background-color: #4f46e5;
+  }
+
+  &::-webkit-slider-thumb {
+    background-color: #eef2ff;
+    border-color: #a5b4fc;
+  }
+
+  &::-moz-range-track {
+    background-color: #4f46e5;
+  }
+
+  &::-moz-range-thumb {
+    background-color: #eef2ff;
+    border-color: #a5b4fc;
+  }
+}
