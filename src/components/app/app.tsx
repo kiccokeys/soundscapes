@@ -5,7 +5,6 @@ import { Howler } from 'howler';
 
 import { useSoundStore } from '@/stores/sound';
 
-import { Container } from '@/components/container';
 import { StoreConsumer } from '@/components/store-consumer';
 import { Sounds } from '@/components/sounds';
 import { MeditationPlayer } from '@/components/meditation-player';
@@ -90,17 +89,17 @@ export function App() {
     <SnackbarProvider>
       <StoreConsumer>
         <MediaControls />
-        <Container>
-          <div id="app" />
+        <div id="app" className={styles.appRoot}>
           <div className={styles.mainLayout}>
             <div className={styles.leftPane}>
               <Sounds functional id="all" sounds={allSounds} />
             </div>
-            <div className={styles.rightPane}>
+            <div className={styles.centerPane}>
               <MeditationPlayer />
             </div>
+            <div className={styles.rightSpacer} aria-hidden="true" />
           </div>
-        </Container>
+        </div>
 
         <Toolbar />
         <SharedModal />

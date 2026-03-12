@@ -1,3 +1,9 @@
+.appRoot {
+  width: 100%;
+  padding: 0 16px 24px;
+  box-sizing: border-box;
+}
+
 .mainLayout {
   display: flex;
   flex-direction: column;
@@ -5,18 +11,34 @@
 }
 
 @media (min-width: 1024px) {
+  .appRoot {
+    padding: 0 24px 32px 0;
+  }
+
   .mainLayout {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
+    min-height: calc(100vh - 220px);
   }
 
   .leftPane {
-    flex: 3;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background: rgb(0 0 0 / 20%);
+    border-radius: 16px;
+    padding: 18px 28px 24px;
+  }
+
+  .centerPane {
+    flex: 1;
     min-width: 0;
   }
 
-  .rightPane {
-    flex: 2;
+  .rightSpacer {
+    flex: 1;
     min-width: 0;
   }
 }

@@ -41,6 +41,12 @@ export const nature: Category = {
       label: 'Cascata',
       src: getAssetPath('/sounds/nature/waterfall.mp3'),
     },
+    {
+      icon: <BsFillDropletFill />,
+      id: 'droplets',
+      label: 'Gocce',
+      src: getAssetPath('/sounds/nature/droplets.mp3'),
+    },
   ],
   title: 'Natura',
 };
