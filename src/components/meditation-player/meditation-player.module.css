@@ -1,13 +1,6 @@
- .meditationPlayer {
+.meditationPlayer {
   margin-top: 32px;
-  padding: 20px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--color-neutral-300);
-  background: linear-gradient(
-    135deg,
-    rgb(39 39 42 / 85%),
-    rgb(24 24 27 / 95%)
-  );
+  padding: 0;
 }
 
 .header {
@@ -31,26 +24,59 @@
 
 .list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 14px;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
 }
 
-.trackButton {
-  padding: 6px 10px;
-  border-radius: 999px;
-  border: 1px solid var(--color-neutral-400);
-  background: transparent;
-  color: var(--color-foreground-subtle);
-  font-size: var(--font-xsm);
+.trackCard {
+  width: 100%;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid var(--color-neutral-300);
+  background: rgb(24 24 27 / 50%);
   cursor: pointer;
+  text-align: left;
   transition: 0.15s;
+  min-height: 120px;
 }
 
-.trackButtonActive {
-  border-color: var(--color-neutral-800);
-  background: var(--color-neutral-100);
-  color: var(--color-foreground);
+.trackCard:hover {
+  border-color: var(--color-neutral-400);
+  background: rgb(24 24 27 / 70%);
+}
+
+.trackCardActive {
+  border-color: #3176ad;
+  box-shadow: 0 0 0 1px rgb(49 118 173 / 40%);
+  background: rgb(15 23 42 / 85%);
+}
+
+.trackMain {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.trackTitle {
+  font-family: var(--font-heading);
+  font-size: var(--font-sm);
+  font-weight: 500;
+}
+
+.trackMeta {
+  margin-top: 2px;
+  font-size: var(--font-xsm);
+  color: var(--color-foreground-subtle);
+}
+
+.trackHint {
+  font-size: var(--font-xsm);
+  color: var(--color-foreground-subtle);
 }
 
 .controlsRow {
@@ -59,6 +85,7 @@
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  margin-top: 10px;
 }
 
 .buttons {
@@ -147,7 +174,33 @@
   color: var(--color-foreground-subtle);
 }
 
-.currentTrack strong {
-  color: var(--color-foreground);
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.progressBar {
+  position: relative;
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: rgb(39 39 42 / 90%);
+  overflow: hidden;
+}
+
+.progressFill {
+  position: absolute;
+  inset: 0;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3176ad, #4f9ed6);
+}
+
+.progressTime {
+  font-size: var(--font-2xsm);
+  color: var(--color-foreground-subtle);
+  white-space: nowrap;
 }
 

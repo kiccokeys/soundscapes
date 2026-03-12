@@ -8,10 +8,13 @@ import { useSoundStore } from '@/stores/sound';
 import { Container } from '@/components/container';
 import { StoreConsumer } from '@/components/store-consumer';
 import { Sounds } from '@/components/sounds';
+import { MeditationPlayer } from '@/components/meditation-player';
 import { SharedModal } from '@/components/modals/shared';
 import { Toolbar } from '@/components/toolbar';
 import { SnackbarProvider } from '@/contexts/snackbar';
 import { MediaControls } from '@/components/media-controls';
+
+import styles from './app.module.css';
 
 import { sounds } from '@/data/sounds';
 import { FADE_OUT } from '@/constants/events';
@@ -89,7 +92,14 @@ export function App() {
         <MediaControls />
         <Container>
           <div id="app" />
-          <Sounds functional id="all" sounds={allSounds} />
+          <div className={styles.mainLayout}>
+            <div className={styles.leftPane}>
+              <Sounds functional id="all" sounds={allSounds} />
+            </div>
+            <div className={styles.rightPane}>
+              <MeditationPlayer />
+            </div>
+          </div>
         </Container>
 
         <Toolbar />

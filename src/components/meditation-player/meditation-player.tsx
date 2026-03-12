@@ -28,6 +28,8 @@ export function MeditationPlayer() {
   const [currentId, setCurrentId] = useState<string>(MEDITATIONS[0]?.id);
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(0.8);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -48,6 +50,8 @@ export function MeditationPlayer() {
     audioRef.current.pause();
     audioRef.current.load();
     setIsPlaying(false);
+    setCurrentTime(0);
+    setDuration(0);
   }, [currentTrack?.file]);
 
   const ensureAudio = () => {
@@ -92,6 +96,11 @@ export function MeditationPlayer() {
     setVolume(v);
   };
 
+  const progress =
+    duration && Number.isFinite(duration) && duration > 0
+      ? Math.min(100, Math.max(0, (currentTime / duration) * 100))
+      : 0;
+
   return (
     <section className={styles.meditationPlayer} aria-label="Meditazioni guidate">
       <audio
@@ -99,7 +108,17 @@ export function MeditationPlayer() {
         ref={audioRef}
         preload="metadata"
         src={currentTrack?.file}
-        onEnded={() => setIsPlaying(false)}
+        onLoadedMetadata={event => {
+          const d = event.currentTarget.duration;
+          if (Number.isFinite(d)) setDuration(d);
+        }}
+        onTimeUpdate={event => {
+          setCurrentTime(event.currentTarget.currentTime);
+        }}
+        onEnded={() => {
+          setIsPlaying(false);
+          setCurrentTime(0);
+        }}
       />
 
       <div className={styles.header}>
@@ -112,61 +131,101 @@ export function MeditationPlayer() {
       </div>
 
       <div className={styles.list}>
-        {MEDITATIONS.map(meditation => (
-          <button
-            key={meditation.id}
-            type="button"
-            className={`${styles.trackButton} ${
-              meditation.id === currentId ? styles.trackButtonActive : ''
-            }`}
-            onClick={() => handleSelectTrack(meditation.id)}
-          >
-            {meditation.title}
-            {meditation.durationLabel ? ` · ${meditation.durationLabel}` : ''}
-          </button>
-        ))}
+        {MEDITATIONS.map(meditation => {
+          const active = meditation.id === currentId;
+
+          return (
+            <button
+              key={meditation.id}
+              type="button"
+              className={`${styles.trackCard} ${
+                active ? styles.trackCardActive : ''
+              }`}
+              onClick={() => handleSelectTrack(meditation.id)}
+            >
+              <div className={styles.trackMain}>
+                <div>
+                  <div className={styles.trackTitle}>{meditation.title}</div>
+                  {meditation.durationLabel && (
+                    <div className={styles.trackMeta}>
+                      {meditation.durationLabel}
+                    </div>
+                  )}
+                </div>
+
+                {!active && (
+                  <div className={styles.trackHint}>Clicca per riprodurre</div>
+                )}
+              </div>
+
+              {active && (
+                <>
+                  <div className={styles.controlsRow}>
+                    <div className={styles.buttons}>
+                      <button
+                        type="button"
+                        className={styles.controlButton}
+                        onClick={handlePlayPause}
+                        disabled={!currentTrack}
+                      >
+                        {isPlaying ? 'Pausa' : 'Riproduci'}
+                      </button>
+                      <button
+                        type="button"
+                        className={styles.controlButton}
+                        onClick={handleRestart}
+                        disabled={!currentTrack}
+                      >
+                        Riavvia
+                      </button>
+                    </div>
+
+                    <div className={styles.volumeGroup}>
+                      <span className={styles.volumeLabel}>Volume</span>
+                      <input
+                        className={styles.volumeSlider}
+                        type="range"
+                        min={0}
+                        max={1}
+                        step={0.01}
+                        value={volume}
+                        onChange={handleVolumeChange}
+                        onClick={event => event.stopPropagation()}
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styles.progressRow}>
+                    <div className={styles.progressBar}>
+                      <div
+                        className={styles.progressFill}
+                        style={{ width: `${progress}%` }}
+                      />
+                    </div>
+                    <div className={styles.progressTime}>
+                      {Math.floor(currentTime / 60)
+                        .toString()
+                        .padStart(2, '0')}
+                      :
+                      {Math.floor(currentTime % 60)
+                        .toString()
+                        .padStart(2, '0')}
+                      {' / '}
+                      {duration
+                        ? `${Math.floor(duration / 60)
+                            .toString()
+                            .padStart(2, '0')}:${Math.floor(duration % 60)
+                            .toString()
+                            .padStart(2, '0')}`
+                        : '--:--'}
+                    </div>
+                  </div>
+                </>
+              )}
+            </button>
+          );
+        })}
       </div>
-
-      <div className={styles.controlsRow}>
-        <div className={styles.buttons}>
-          <button
-            type="button"
-            className={styles.controlButton}
-            onClick={handlePlayPause}
-            disabled={!currentTrack}
-          >
-            {isPlaying ? 'Pausa' : 'Riproduci'}
-          </button>
-          <button
-            type="button"
-            className={styles.controlButton}
-            onClick={handleRestart}
-            disabled={!currentTrack}
-          >
-            Riavvia
-          </button>
-        </div>
-
-        <div className={styles.volumeGroup}>
-          <span className={styles.volumeLabel}>Volume</span>
-          <input
-            className={styles.volumeSlider}
-            type="range"
-            min={0}
-            max={1}
-            step={0.01}
-            value={volume}
-            onChange={handleVolumeChange}
-          />
-        </div>
-      </div>
-
-      {currentTrack && (
-        <p className={styles.currentTrack}>
-          In riproduzione: <strong>{currentTrack.title}</strong>
-        </p>
-      )}
     </section>
   );
 }
-
