@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { BiPlay, BiPause, BiReset } from 'react-icons/bi/index';
-import { HiMiniSpeakerWave } from 'react-icons/hi2';
+import { HiMiniSpeakerWave } from 'react-icons/hi2/index';
 
 import styles from './meditation-player.module.css';
 
