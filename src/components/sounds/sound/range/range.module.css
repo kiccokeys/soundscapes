@@ -1,7 +1,7 @@
 .range {
   width: 100%;
   max-width: 120px;
-  margin-top: 10px;
+  margin: 10px auto 0;
 
   /********** Range Input Styles **********/
 
@@ -73,20 +73,20 @@
 
 .rangeActive {
   &::-webkit-slider-runnable-track {
-    background-color: #3176ad;
+    background-color: #394b59;
   }
 
   &::-webkit-slider-thumb {
-    background-color: #e0f2ff;
-    border-color: #93c5fd;
+    background-color: #e2e8f0;
+    border-color: #64748b;
   }
 
   &::-moz-range-track {
-    background-color: #3176ad;
+    background-color: #394b59;
   }
 
   &::-moz-range-thumb {
-    background-color: #e0f2ff;
-    border-color: #93c5fd;
+    background-color: #e2e8f0;
+    border-color: #64748b;
   }
 }

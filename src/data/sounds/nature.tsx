@@ -32,7 +32,7 @@ export const nature: Category = {
     {
       icon: <BsFire />,
       id: 'campfire',
-      label: 'Falò',
+      label: 'Crepitio del fuoco',
       src: getAssetPath('/sounds/nature/campfire.mp3'),
     },
     {

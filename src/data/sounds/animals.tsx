@@ -30,7 +30,7 @@ export const animals: Category = {
     {
       icon: <PiBirdFill />,
       id: 'birds',
-      label: 'Uccelli',
+      label: 'Uccelli diurni',
       src: getAssetPath('/sounds/animals/birds.mp3'),
     },
     {
@@ -42,7 +42,7 @@ export const animals: Category = {
     {
       icon: <GiOwl />,
       id: 'owl',
-      label: 'Gufo',
+      label: 'Uccelli notturni',
       src: getAssetPath('/sounds/animals/owl.mp3'),
     },
     {

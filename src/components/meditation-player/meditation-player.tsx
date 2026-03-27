@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { BiPlay, BiPause, BiReset } from 'react-icons/bi/index';
+import { HiMiniSpeakerWave } from 'react-icons/hi2';
 
 import styles from './meditation-player.module.css';
 
@@ -30,6 +32,7 @@ export function MeditationPlayer() {
   const [volume, setVolume] = useState(0.8);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [autoPlay, setAutoPlay] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -53,6 +56,23 @@ export function MeditationPlayer() {
     setCurrentTime(0);
     setDuration(0);
   }, [currentTrack?.file]);
+
+  useEffect(() => {
+    if (!autoPlay) return;
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    audio
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+        setAutoPlay(false);
+      })
+      .catch(() => {
+        setIsPlaying(false);
+        setAutoPlay(false);
+      });
+  }, [autoPlay, currentTrack]);
 
   const ensureAudio = () => {
     if (!audioRef.current) return null;
@@ -88,6 +108,7 @@ export function MeditationPlayer() {
   const handleSelectTrack = (id: string) => {
     if (id === currentId) return;
     setCurrentId(id);
+    setAutoPlay(true);
   };
 
   const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,9 +117,12 @@ export function MeditationPlayer() {
     setVolume(v);
   };
 
+  const clampedDuration =
+    duration && Number.isFinite(duration) && duration > 0 ? duration : 0;
+
   const progress =
-    duration && Number.isFinite(duration) && duration > 0
-      ? Math.min(100, Math.max(0, (currentTime / duration) * 100))
+    clampedDuration > 0
+      ? Math.min(100, Math.max(0, (currentTime / clampedDuration) * 100))
       : 0;
 
   return (
@@ -120,15 +144,6 @@ export function MeditationPlayer() {
           setCurrentTime(0);
         }}
       />
-
-      <div className={styles.header}>
-        <div>
-          <div className={styles.title}>Meditazioni guidate</div>
-          <div className={styles.subtitle}>
-            Scegli una meditazione da ascoltare con il tuo soundscape.
-          </div>
-        </div>
-      </div>
 
       <div className={styles.list}>
         {MEDITATIONS.map(meditation => {
@@ -167,21 +182,25 @@ export function MeditationPlayer() {
                         className={styles.controlButton}
                         onClick={handlePlayPause}
                         disabled={!currentTrack}
+                        aria-label={isPlaying ? 'Pausa meditazione' : 'Riproduci meditazione'}
                       >
-                        {isPlaying ? 'Pausa' : 'Riproduci'}
+                        {isPlaying ? <BiPause /> : <BiPlay />}
                       </button>
                       <button
                         type="button"
                         className={styles.controlButton}
                         onClick={handleRestart}
                         disabled={!currentTrack}
+                        aria-label="Riavvia meditazione"
                       >
-                        Riavvia
+                        <BiReset />
                       </button>
                     </div>
 
                     <div className={styles.volumeGroup}>
-                      <span className={styles.volumeLabel}>Volume</span>
+                      <span className={styles.volumeLabel} aria-hidden="true">
+                        <HiMiniSpeakerWave />
+                      </span>
                       <input
                         className={styles.volumeSlider}
                         type="range"
@@ -189,6 +208,7 @@ export function MeditationPlayer() {
                         max={1}
                         step={0.01}
                         value={volume}
+                        aria-label="Volume meditazione"
                         onChange={handleVolumeChange}
                         onClick={event => event.stopPropagation()}
                       />
@@ -196,12 +216,31 @@ export function MeditationPlayer() {
                   </div>
 
                   <div className={styles.progressRow}>
-                    <div className={styles.progressBar}>
-                      <div
-                        className={styles.progressFill}
-                        style={{ width: `${progress}%` }}
-                      />
-                    </div>
+                    <input
+                      className={styles.progressSlider}
+                      type="range"
+                      min={0}
+                      max={clampedDuration || 0}
+                      step={1}
+                      value={Math.min(
+                        clampedDuration || 0,
+                        Math.max(0, currentTime),
+                      )}
+                      style={
+                        clampedDuration
+                          ? { ['--progress' as string]: `${progress}%` }
+                          : undefined
+                      }
+                      onChange={event => {
+                        const audio = ensureAudio();
+                        if (!audio) return;
+                        const nextTime = Number(event.target.value);
+                        audio.currentTime = nextTime;
+                        setCurrentTime(nextTime);
+                      }}
+                      onClick={event => event.stopPropagation()}
+                      aria-label="Posizione meditazione"
+                    />
                     <div className={styles.progressTime}>
                       {Math.floor(currentTime / 60)
                         .toString()

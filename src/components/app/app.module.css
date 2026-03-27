@@ -28,13 +28,15 @@
     flex-direction: column;
     align-items: stretch;
     background: rgb(0 0 0 / 20%);
-    border-radius: 16px;
     padding: 18px 28px 24px;
+    height: 100vh;
   }
 
   .centerPane {
     flex: 1;
     min-width: 0;
+    padding-top: 7px;
+    padding-left: 12px;
   }
 
   .rightSpacer {

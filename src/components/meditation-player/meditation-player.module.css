@@ -25,23 +25,25 @@
 .list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 16px;
   margin-top: 8px;
 }
 
 .trackCard {
   width: 100%;
-  padding: 10px 12px;
+  padding: 19px 28px 22px 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  position: relative;
   border-radius: 10px;
   border: 1px solid var(--color-neutral-300);
   background: rgb(24 24 27 / 50%);
   cursor: pointer;
   text-align: left;
   transition: 0.15s;
-  min-height: 120px;
+  min-height: 160px;
+  height: 160px;
 }
 
 .trackCard:hover {
@@ -64,8 +66,13 @@
 
 .trackTitle {
   font-family: var(--font-heading);
-  font-size: var(--font-sm);
-  font-weight: 500;
+  font-size: var(--font-2xsm);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--color-foreground);
+  text-transform: lowercase;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
 }
 
 .trackMeta {
@@ -99,11 +106,12 @@
   align-items: center;
   justify-content: center;
   height: 32px;
-  padding: 0 10px;
+  width: 32px;
+  padding: 0;
   border-radius: 999px;
-  border: 1px solid var(--color-neutral-300);
-  background: var(--color-neutral-900);
-  color: var(--color-foreground);
+  border: 1px solid transparent;
+  background: rgb(255 255 255 / 10%);
+  color: #ffffff;
   font-size: var(--font-xsm);
   cursor: pointer;
   gap: 4px;
@@ -116,56 +124,64 @@
 }
 
 .controlButton:not(:disabled):hover {
-  border-color: var(--color-neutral-500);
-  background: var(--color-neutral-800);
+  border-color: rgb(255 255 255 / 30%);
+  background: rgb(255 255 255 / 16%);
 }
 
 .volumeGroup {
+  position: absolute;
+  top: 22px;
+  right: 28px;
   display: flex;
   align-items: center;
   gap: 6px;
-  margin-left: auto;
 }
 
 .volumeLabel {
-  font-size: var(--font-xsm);
-  color: var(--color-foreground-subtle);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: var(--font-sm);
 }
 
 .volumeSlider {
-  width: 120px;
+  width: 100%;
+  max-width: 120px;
+  margin: 0;
   appearance: none;
   background: transparent;
 }
 
 .volumeSlider::-webkit-slider-runnable-track {
-  height: 0.35rem;
-  border-radius: 999px;
-  background-color: #27272a;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #394b59;
 }
 
 .volumeSlider::-webkit-slider-thumb {
-  width: 12px;
-  height: 12px;
-  margin-top: -4px;
+  width: 14px;
+  height: 14px;
+  margin-top: -3px;
   appearance: none;
   border-radius: 50%;
-  background-color: #e4e4e7;
-  border: 1px solid #71717a;
+  background-color: #e2e8f0;
+  border: 1px solid #64748b;
 }
 
 .volumeSlider::-moz-range-track {
-  height: 0.35rem;
-  border-radius: 999px;
-  background-color: #27272a;
+  height: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: #394b59;
 }
 
 .volumeSlider::-moz-range-thumb {
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
+  margin-top: -3px;
   border-radius: 50%;
-  background-color: #e4e4e7;
-  border: 1px solid #71717a;
+  background-color: #e2e8f0;
+  border: 1px solid #64748b;
 }
 
 .currentTrack {
@@ -181,21 +197,42 @@
   margin-top: 8px;
 }
 
-.progressBar {
-  position: relative;
+.progressSlider {
   flex: 1;
-  height: 4px;
+  appearance: none;
+  height: 0.5rem;
   border-radius: 999px;
-  background: rgb(39 39 42 / 90%);
-  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    #1695ff 0%,
+    #1695ff var(--progress, 0%),
+    #394b59 var(--progress, 0%),
+    #394b59 100%
+  );
 }
 
-.progressFill {
-  position: absolute;
-  inset: 0;
+.progressSlider::-webkit-slider-runnable-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.progressSlider::-webkit-slider-thumb {
   width: 0;
-  border-radius: inherit;
-  background: linear-gradient(90deg, #3176ad, #4f9ed6);
+  height: 0;
+  appearance: none;
+}
+
+.progressSlider::-moz-range-track {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.progressSlider::-moz-range-thumb {
+  width: 0;
+  height: 0;
+  border: none;
 }
 
 .progressTime {

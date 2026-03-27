@@ -15,7 +15,14 @@ body {
   font-family: var(--font-body);
   font-size: var(--font-base);
   color: var(--color-foreground);
-  background-color: #122433;
+  background:
+    linear-gradient(
+      90deg,
+      rgb(22 149 255 / 10%) 0%,
+      rgb(22 149 255 / 10%) 50%,
+      transparent 100%
+    ),
+    #122433;
   /* Workaround for modal and scrollbar layout shifts */
   width: 100vw;
   overflow-x: hidden;
