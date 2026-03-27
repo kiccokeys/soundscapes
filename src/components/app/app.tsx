@@ -91,19 +91,17 @@ export function App() {
         <MediaControls />
         <div id="app" className={styles.appRoot}>
           <div className={styles.mainLayout}>
-            <div className={styles.leftPane}>
-              <Sounds functional id="all" sounds={allSounds} />
-            </div>
             <div className={styles.centerPane}>
-              <MeditationPlayer />
-            </div>
-            <div className={styles.rightSpacer}>
               <img
                 alt="Feelbetter logo"
-                className={styles.rightSpacerLogo}
+                className={styles.meditationLogo}
                 src="/feelbetterlogo.svg"
-                width="180"
+                width="140"
               />
+              <MeditationPlayer />
+            </div>
+            <div className={styles.leftPane}>
+              <Sounds functional id="all" sounds={allSounds} />
             </div>
           </div>
         </div>
