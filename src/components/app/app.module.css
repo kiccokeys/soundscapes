@@ -42,6 +42,16 @@
   .rightSpacer {
     flex: 1;
     min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #00000022;
+  }
+
+  .rightSpacerLogo {
+    width: 180px;
+    height: auto;
+    opacity: 0.9;
   }
 }
 

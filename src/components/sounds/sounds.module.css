@@ -8,6 +8,7 @@
 
 @media (min-width: 1024px) {
   .sounds {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     height: 100%;
     flex: 1;
     grid-auto-rows: minmax(150px, 1fr);

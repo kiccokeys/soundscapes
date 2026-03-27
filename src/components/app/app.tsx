@@ -97,7 +97,14 @@ export function App() {
             <div className={styles.centerPane}>
               <MeditationPlayer />
             </div>
-            <div className={styles.rightSpacer} aria-hidden="true" />
+            <div className={styles.rightSpacer}>
+              <img
+                alt="Feelbetter logo"
+                className={styles.rightSpacerLogo}
+                src="/feelbetterlogo.svg"
+                width="180"
+              />
+            </div>
           </div>
         </div>
 
