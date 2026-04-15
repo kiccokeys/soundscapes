@@ -1,13 +1,7 @@
-import { GiWaterfall, GiStonePile } from 'react-icons/gi/index';
+import { GiWaterfall } from 'react-icons/gi/index';
 import { BsFire, BsFillDropletFill } from 'react-icons/bs/index';
 import { BiSolidTree, BiWater } from 'react-icons/bi/index';
-import {
-  FaWater,
-  FaWind,
-  FaLeaf,
-  FaRegSnowflake,
-  FaTree,
-} from 'react-icons/fa/index';
+import { FaWater } from 'react-icons/fa/index';
 
 import type { Category } from '../types';
 

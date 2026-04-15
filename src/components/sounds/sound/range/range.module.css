@@ -25,7 +25,7 @@
 
   &::-webkit-slider-runnable-track {
     height: 0.5rem;
-    background-color: #27272a;
+    background-color: rgb(39 39 42 / 42%);
     border-radius: 0.5rem;
   }
 
@@ -35,12 +35,12 @@
     margin-top: -3px;
     appearance: none;
     background-color: #3f3f46;
-    border: 1px solid #52525b;
+    border: none;
     border-radius: 50%;
   }
 
   &:not(:disabled):focus::-webkit-slider-thumb {
-    border: 1px solid #053a5f;
+    border: none;
     outline: 3px solid #053a5f;
     outline-offset: 0.125rem;
   }
@@ -49,7 +49,7 @@
 
   &::-moz-range-track {
     height: 0.5rem;
-    background-color: #27272a;
+    background-color: rgb(39 39 42 / 42%);
     border-radius: 0.5rem;
   }
 
@@ -59,34 +59,57 @@
     margin-top: -3px;
     background-color: #3f3f46;
     border: none;
-    border: 1px solid #52525b;
-    border-radius: 0;
     border-radius: 50%;
   }
 
   &:not(:disabled):focus::-moz-range-thumb {
-    border: 1px solid #053a5f;
+    border: none;
     outline: 3px solid #053a5f;
     outline-offset: 0.125rem;
   }
 }
 
+/* Eredita --sound-meter dalla card (sound.module.css); stesso schema della barra volume meditazioni */
 .rangeActive {
+  --meter-accent: var(--sound-meter, #e2e8f0);
+  --meter-soft: color-mix(in srgb, var(--meter-accent) 58%, rgb(51 65 85));
+  --volume-track-rest: rgb(57 75 89 / 42%);
+
   &::-webkit-slider-runnable-track {
-    background-color: #394b59;
+    background: linear-gradient(
+      90deg,
+      var(--meter-accent) 0%,
+      var(--meter-soft) var(--volume, 0%),
+      var(--volume-track-rest) var(--volume, 0%),
+      var(--volume-track-rest) 100%
+    );
   }
 
   &::-webkit-slider-thumb {
-    background-color: #e2e8f0;
-    border-color: #64748b;
+    background: linear-gradient(
+      145deg,
+      var(--meter-accent) 0%,
+      var(--meter-soft) 100%
+    );
+    border: none;
   }
 
   &::-moz-range-track {
-    background-color: #394b59;
+    background: linear-gradient(
+      90deg,
+      var(--meter-accent) 0%,
+      var(--meter-soft) var(--volume, 0%),
+      var(--volume-track-rest) var(--volume, 0%),
+      var(--volume-track-rest) 100%
+    );
   }
 
   &::-moz-range-thumb {
-    background-color: #e2e8f0;
-    border-color: #64748b;
+    background: linear-gradient(
+      145deg,
+      var(--meter-accent) 0%,
+      var(--meter-soft) 100%
+    );
+    border: none;
   }
 }

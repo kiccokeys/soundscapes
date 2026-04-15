@@ -15,7 +15,7 @@ export function Sounds({ functional, id, sounds }: SoundsProps) {
   const firstNewSound = useRef<HTMLDivElement>(null);
 
   return (
-    <div>
+    <div className={styles.wrap}>
       <div className={styles.sounds}>
         {sounds.map((sound, index) => (
           <Sound

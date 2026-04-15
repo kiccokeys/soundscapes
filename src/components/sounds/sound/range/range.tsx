@@ -23,6 +23,11 @@ export function Range({ id, label }: RangeProps) {
       min={0}
       type="range"
       value={volume * 100}
+      style={
+        isSelected
+          ? { ['--volume' as string]: `${volume * 100}%` }
+          : undefined
+      }
       onClick={e => e.stopPropagation()}
       onChange={e =>
         !locked && isSelected && setVolume(id, Number(e.target.value) / 100)

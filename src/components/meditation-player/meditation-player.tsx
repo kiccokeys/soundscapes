@@ -13,14 +13,74 @@ type MeditationTrack = {
 
 const MEDITATIONS: MeditationTrack[] = [
   {
-    id: 'meditazione',
+    id: 'meditazione-1',
     title: 'Meditazione guidata 1',
     file: '/sounds/meditazione.mp3',
     durationLabel: '15 min',
   },
   {
-    id: 'meditazione2',
+    id: 'meditazione-2',
     title: 'Meditazione guidata 2',
+    file: '/sounds/meditazione2.mp3',
+    durationLabel: '20 min',
+  },
+  {
+    id: 'meditazione-3',
+    title: 'Meditazione guidata 3',
+    file: '/sounds/meditazione.mp3',
+    durationLabel: '15 min',
+  },
+  {
+    id: 'meditazione-4',
+    title: 'Meditazione guidata 4',
+    file: '/sounds/meditazione2.mp3',
+    durationLabel: '20 min',
+  },
+  {
+    id: 'meditazione-5',
+    title: 'Meditazione guidata 5',
+    file: '/sounds/meditazione.mp3',
+    durationLabel: '15 min',
+  },
+  {
+    id: 'meditazione-6',
+    title: 'Meditazione guidata 6',
+    file: '/sounds/meditazione2.mp3',
+    durationLabel: '20 min',
+  },
+  {
+    id: 'meditazione-7',
+    title: 'Meditazione guidata 7',
+    file: '/sounds/meditazione.mp3',
+    durationLabel: '15 min',
+  },
+  {
+    id: 'meditazione-8',
+    title: 'Meditazione guidata 8',
+    file: '/sounds/meditazione2.mp3',
+    durationLabel: '20 min',
+  },
+  {
+    id: 'meditazione-9',
+    title: 'Meditazione guidata 9',
+    file: '/sounds/meditazione.mp3',
+    durationLabel: '15 min',
+  },
+  {
+    id: 'meditazione-10',
+    title: 'Meditazione guidata 10',
+    file: '/sounds/meditazione2.mp3',
+    durationLabel: '20 min',
+  },
+  {
+    id: 'meditazione-11',
+    title: 'Meditazione guidata 11',
+    file: '/sounds/meditazione.mp3',
+    durationLabel: '15 min',
+  },
+  {
+    id: 'meditazione-12',
+    title: 'Meditazione guidata 12',
     file: '/sounds/meditazione2.mp3',
     durationLabel: '20 min',
   },
@@ -167,10 +227,6 @@ export function MeditationPlayer() {
                     </div>
                   )}
                 </div>
-
-                {!active && (
-                  <div className={styles.trackHint}>Clicca per riprodurre</div>
-                )}
               </div>
 
               {active && (
@@ -208,6 +264,9 @@ export function MeditationPlayer() {
                         max={1}
                         step={0.01}
                         value={volume}
+                        style={{
+                          ['--volume' as string]: `${volume * 100}%`,
+                        }}
                         aria-label="Volume meditazione"
                         onChange={handleVolumeChange}
                         onClick={event => event.stopPropagation()}

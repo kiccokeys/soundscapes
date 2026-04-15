@@ -93,15 +93,18 @@ export function App() {
           <div className={styles.mainLayout}>
             <div className={styles.centerPane}>
               <img
-                alt="Feelbetter logo"
+                alt="Feel Better Lab"
                 className={styles.meditationLogo}
-                src="/feelbetterlogo.svg"
-                width="140"
+                src="/feel_better_lab_logo.svg"
+                width="282"
+                height="56"
               />
               <MeditationPlayer />
             </div>
-            <div className={styles.leftPane}>
-              <Sounds functional id="all" sounds={allSounds} />
+            <div className={styles.soundscapeColumnSpacer}>
+              <div className={styles.leftPane}>
+                <Sounds functional id="all" sounds={allSounds} />
+              </div>
             </div>
           </div>
         </div>

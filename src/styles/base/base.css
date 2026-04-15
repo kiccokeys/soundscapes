@@ -9,23 +9,57 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: #0e2030;
+}
+
+/* Scrollbar: assente su desktop; su mobile solo una traccia leggera */
+@media (max-width: 1023px) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(255 255 255 / 22%) transparent;
+  }
+
+  html::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background-color: rgb(255 255 255 / 22%);
+    border-radius: 999px;
+  }
+}
+
+@media (min-width: 1024px) {
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
 }
 
 body {
+  position: relative;
+  isolation: isolate;
   font-family: var(--font-body);
   font-size: var(--font-base);
   color: var(--color-foreground);
-  background:
-    linear-gradient(
-      90deg,
-      rgb(22 149 255 / 10%) 0%,
-      rgb(22 149 255 / 10%) 50%,
-      transparent 100%
-    ),
-    #122433;
+  background-color: transparent;
   /* Workaround for modal and scrollbar layout shifts */
   width: 100vw;
   overflow-x: hidden;
+}
+
+.pageRoot {
+  position: relative;
+  z-index: 1;
 }
 
 ::selection {

@@ -1,23 +1,6 @@
-import {
-  GiCricket,
-  GiSeagull,
-  GiWolfHead,
-  GiOwl,
-  GiWhaleTail,
-  GiTreeBeehive,
-  GiEgyptianBird,
-  GiChicken,
-  GiCow,
-  GiSheep,
-} from 'react-icons/gi/index';
-import {
-  FaDog,
-  FaFrog,
-  FaHorseHead,
-  FaCat,
-  FaCrow,
-} from 'react-icons/fa/index';
-import { PiBirdFill, PiDogBold } from 'react-icons/pi/index';
+import { GiCricket, GiOwl } from 'react-icons/gi/index';
+import { FaDog, FaCat } from 'react-icons/fa/index';
+import { PiBirdFill } from 'react-icons/pi/index';
 
 import type { Category } from '../types';
 

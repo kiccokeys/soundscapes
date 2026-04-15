@@ -88,6 +88,7 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
   return (
     <div
       aria-label={`${label} sound`}
+      data-sound-id={id}
       ref={ref}
       role="button"
       tabIndex={0}
@@ -99,6 +100,14 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
       onClick={handleClick}
       onKeyDown={handleKeyDown}
     >
+      {isSelected ? (
+        <div aria-hidden="true" className={styles.soundMeter}>
+          <span className={styles.soundMeterBar} />
+          <span className={styles.soundMeterBar} />
+          <span className={styles.soundMeterBar} />
+          <span className={styles.soundMeterBar} />
+        </div>
+      ) : null}
       <div className={styles.icon}>
         {isLoading ? (
           <span aria-hidden="true" className={styles.spinner}>

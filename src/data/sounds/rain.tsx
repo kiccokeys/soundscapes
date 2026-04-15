@@ -1,11 +1,4 @@
-import {
-  BsFillCloudRainFill,
-  BsFillCloudRainHeavyFill,
-  BsUmbrellaFill,
-} from 'react-icons/bs/index';
-import { GiWindow } from 'react-icons/gi/index';
-import { FaLeaf, FaCarSide } from 'react-icons/fa/index';
-import { PiTentFill } from 'react-icons/pi/index';
+import { BsFillCloudRainFill, BsFillCloudRainHeavyFill } from 'react-icons/bs/index';
 import { MdOutlineThunderstorm } from 'react-icons/md/index';
 
 import type { Category } from '../types';

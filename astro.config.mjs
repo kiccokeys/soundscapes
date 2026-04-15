@@ -8,8 +8,8 @@ export default defineConfig({
     react(),
     AstroPWA({
       manifest: {
-        background_color: '#09090b',
-        description: 'Ambient sounds for focus and calm.',
+        background_color: '#0e2030',
+        description: 'Benessere audio guidato per corpo e mente.',
         display: 'standalone',
         icons: [
           ...[72, 128, 144, 152, 192, 256, 512].map(size => ({
@@ -18,12 +18,12 @@ export default defineConfig({
             type: 'image/png',
           })),
         ],
-        name: 'Moodist',
+        name: 'FeelbetterLab',
         orientation: 'any',
         scope: '/',
-        short_name: 'Moodist',
+        short_name: 'FeelbetterLab',
         start_url: '/',
-        theme_color: '#09090b',
+        theme_color: '#0e2030',
       },
       registerType: 'prompt',
       workbox: {

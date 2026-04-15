@@ -1,6 +1,7 @@
 ---
 import { pwaInfo } from 'virtual:pwa-info'; // eslint-disable-line
 
+import { AuroraBackground } from '@/components/aurora-background';
 import { Reload } from '@/components/reload';
 
 import { count } from '@/lib/sounds';
@@ -12,10 +13,11 @@ interface Props {
   title?: string;
 }
 
-const title = Astro.props.title || 'Moodist: Ambient Sounds for Focus and Calm';
+const title =
+  Astro.props.title || 'FeelbetterLab: Benessere Audio Guidato a Sesto San Giovanni';
 const description =
   Astro.props.description ||
-  `Moodist is a free and open-source ambient sound generator featuring ${count()} carefully curated sounds. Create your ideal atmosphere for relaxation, focus, or creativity with this versatile tool.`;
+  `FeelbetterLab offre ${count()} tracce audio curate per supportare benessere, rilassamento e concentrazione, con un approccio professionale e orientato alla salute.`;
 ---
 
 <!doctype html>
@@ -24,7 +26,7 @@ const description =
     <meta charset="UTF-8" />
     <meta content="width=device-width" name="viewport" />
     <meta content={Astro.generator} name="generator" />
-    <meta content="#18181b" name="theme-color" />
+    <meta content="#0e2030" name="theme-color" />
     <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
 
     <title>{title}</title>
@@ -33,7 +35,7 @@ const description =
 
     <meta content={title} property="og:title" />
     <meta content={description} property="og:description" />
-    <meta content="Moodist" property="og:site_name" />
+    <meta content="FeelbetterLab" property="og:site_name" />
     <meta content="https://moodist.app" property="og:url" />
     <meta content="website" property="og:type" />
     <meta content="https://moodist.app/og.png" property="og:image" />
@@ -43,7 +45,10 @@ const description =
     {pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} />}
   </head>
   <body>
-    <slot />
+    <AuroraBackground client:only="react" />
+    <div class="pageRoot">
+      <slot />
+    </div>
 
     <Reload client:load />
   </body>

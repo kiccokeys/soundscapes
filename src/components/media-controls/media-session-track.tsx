@@ -8,7 +8,7 @@ import { useSSR } from '@/hooks/use-ssr';
 import { useDarkTheme } from '@/hooks/use-dark-theme';
 
 const metadata: MediaMetadataInit = {
-  artist: 'Moodist',
+  artist: 'FeelbetterLab',
   title: 'Ambient Sounds for Focus and Calm',
 };
 

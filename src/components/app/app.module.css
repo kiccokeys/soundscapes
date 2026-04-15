@@ -10,6 +10,12 @@
   gap: 24px;
 }
 
+.meditationLogo {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 @media (min-width: 1024px) {
   .appRoot {
     padding: 0 0 32px 0;
@@ -18,33 +24,74 @@
   .mainLayout {
     flex-direction: row;
     align-items: stretch;
-    min-height: calc(100vh - 220px);
+    min-height: 100vh;
+  }
+
+  /*
+   * Colonna fissa a viewport: lo sticky saltava ai limiti del contenitore scrollabile.
+   * Lo spacer mantiene metà larghezza nel flex (con gap 24px); il pannello è position:fixed.
+   */
+  .soundscapeColumnSpacer {
+    flex: 1;
+    min-width: 0;
+    align-self: stretch;
   }
 
   .leftPane {
-    flex: 1;
-    min-width: 0;
+    --pane-pad-y: 28px;
+    --pane-pad-x: 28px;
+    --main-gap: 24px;
+
+    position: fixed;
+    z-index: 1;
+    top: var(--pane-pad-y);
+    right: var(--pane-pad-x);
+    bottom: var(--pane-pad-y);
+    left: calc(50vw + var(--main-gap) / 2);
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background: rgb(0 0 0 / 20%);
-    padding: 8px 28px 24px;
-    height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 20px;
+    background: rgb(0 0 0 / 12%);
+    padding: var(--pane-pad-y) var(--pane-pad-x) var(--pane-pad-y);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .leftPane::-webkit-scrollbar {
+    width: 0;
+    height: 0;
   }
 
   .centerPane {
     flex: 1;
     min-width: 0;
     padding-top: 7px;
+    padding-right: 36px;
     padding-left: 20px;
   }
 
   .meditationLogo {
-    display: block;
-    width: 180px;
-    height: auto;
+    width: min(100%, 260px);
     margin: 16px 0 12px;
     opacity: 0.9;
+  }
+}
+
+@media (min-width: 1280px) {
+  .leftPane {
+    --pane-pad-y: 38px;
+    --pane-pad-x: 38px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .leftPane {
+    --pane-pad-y: 48px;
+    --pane-pad-x: 48px;
   }
 }
 

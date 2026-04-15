@@ -42,6 +42,7 @@
     "howler": "2.2.4",
     "js-confetti": "0.12.0",
     "motion": "12.23.24",
+    "ogl": "1.0.11",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hotkeys-hook": "3.2.1",
