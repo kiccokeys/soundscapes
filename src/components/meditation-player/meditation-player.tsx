@@ -6,83 +6,79 @@ import styles from './meditation-player.module.css';
 
 type MeditationTrack = {
   id: string;
+  /** Nome della pratica (seconda riga in card) */
   title: string;
+  /** Tipologia / livello (prima riga in card) */
+  subtitle: string;
   file: string;
-  durationLabel?: string;
 };
 
 const MEDITATIONS: MeditationTrack[] = [
   {
     id: 'meditazione-1',
-    title: 'Meditazione guidata 1',
+    title: 'Il Ritorno al Presente',
+    subtitle: 'Mindfulness liv. 1',
     file: '/sounds/meditazione.mp3',
-    durationLabel: '15 min',
   },
   {
     id: 'meditazione-2',
-    title: 'Meditazione guidata 2',
+    title: "L'Osservatore Silenzioso",
+    subtitle: 'Mindfulness liv. 2',
     file: '/sounds/meditazione2.mp3',
-    durationLabel: '20 min',
   },
   {
     id: 'meditazione-3',
-    title: 'Meditazione guidata 3',
+    title: 'La Coscienza Espansa',
+    subtitle: 'Mindfulness liv. 3',
     file: '/sounds/meditazione.mp3',
-    durationLabel: '15 min',
   },
   {
     id: 'meditazione-4',
-    title: 'Meditazione guidata 4',
+    title: 'Il Respiro che Guarisce',
+    subtitle: 'Respirazione Guidata liv. 1',
     file: '/sounds/meditazione2.mp3',
-    durationLabel: '20 min',
   },
   {
     id: 'meditazione-5',
-    title: 'Meditazione guidata 5',
+    title: 'Il Respiro Trasformativo',
+    subtitle: 'Respirazione Guidata liv. 2',
     file: '/sounds/meditazione.mp3',
-    durationLabel: '15 min',
   },
   {
     id: 'meditazione-6',
-    title: 'Meditazione guidata 6',
+    title: 'Il Respiro Alchemico',
+    subtitle: 'Respirazione Guidata liv. 3',
     file: '/sounds/meditazione2.mp3',
-    durationLabel: '20 min',
   },
   {
     id: 'meditazione-7',
-    title: 'Meditazione guidata 7',
+    title: 'Il Giardino Interiore',
+    subtitle: 'Meditazione liv. 1',
     file: '/sounds/meditazione.mp3',
-    durationLabel: '15 min',
   },
   {
     id: 'meditazione-8',
-    title: 'Meditazione guidata 8',
+    title: 'Il Fuoco Interiore',
+    subtitle: 'Meditazione liv. 2',
     file: '/sounds/meditazione2.mp3',
-    durationLabel: '20 min',
   },
   {
     id: 'meditazione-9',
-    title: 'Meditazione guidata 9',
+    title: "L'Unione",
+    subtitle: 'Meditazione liv. 3',
     file: '/sounds/meditazione.mp3',
-    durationLabel: '15 min',
   },
   {
     id: 'meditazione-10',
-    title: 'Meditazione guidata 10',
+    title: 'La Stanza della Rigenerazione',
+    subtitle: 'Visualizzazioni liv. 1',
     file: '/sounds/meditazione2.mp3',
-    durationLabel: '20 min',
   },
   {
     id: 'meditazione-11',
-    title: 'Meditazione guidata 11',
+    title: "L'Architetto della Nuova Vita",
+    subtitle: 'Visualizzazioni liv. 2',
     file: '/sounds/meditazione.mp3',
-    durationLabel: '15 min',
-  },
-  {
-    id: 'meditazione-12',
-    title: 'Meditazione guidata 12',
-    file: '/sounds/meditazione2.mp3',
-    durationLabel: '20 min',
   },
 ];
 
@@ -216,22 +212,39 @@ export function MeditationPlayer() {
               className={`${styles.trackCard} ${
                 active ? styles.trackCardActive : ''
               }`}
+              aria-label={`${meditation.subtitle}. ${meditation.title}`}
               onClick={() => handleSelectTrack(meditation.id)}
             >
               <div className={styles.trackMain}>
-                <div>
-                  <div className={styles.trackTitle}>{meditation.title}</div>
-                  {meditation.durationLabel && (
-                    <div className={styles.trackMeta}>
-                      {meditation.durationLabel}
-                    </div>
-                  )}
+                <div className={styles.trackText}>
+                  <div className={styles.trackLine}>{meditation.subtitle}</div>
+                  <div className={styles.trackLine}>{meditation.title}</div>
                 </div>
               </div>
 
               {active && (
                 <>
-                  <div className={styles.controlsRow}>
+                  <div className={styles.volumeGroup}>
+                    <span className={styles.volumeLabel} aria-hidden="true">
+                      <HiMiniSpeakerWave />
+                    </span>
+                    <input
+                      className={styles.volumeSlider}
+                      type="range"
+                      min={0}
+                      max={1}
+                      step={0.01}
+                      value={volume}
+                      style={{
+                        ['--volume' as string]: `${volume * 100}%`,
+                      }}
+                      aria-label="Volume meditazione"
+                      onChange={handleVolumeChange}
+                      onClick={event => event.stopPropagation()}
+                    />
+                  </div>
+
+                  <div className={styles.transportRow}>
                     <div className={styles.buttons}>
                       <button
                         type="button"
@@ -252,29 +265,6 @@ export function MeditationPlayer() {
                         <BiReset />
                       </button>
                     </div>
-
-                    <div className={styles.volumeGroup}>
-                      <span className={styles.volumeLabel} aria-hidden="true">
-                        <HiMiniSpeakerWave />
-                      </span>
-                      <input
-                        className={styles.volumeSlider}
-                        type="range"
-                        min={0}
-                        max={1}
-                        step={0.01}
-                        value={volume}
-                        style={{
-                          ['--volume' as string]: `${volume * 100}%`,
-                        }}
-                        aria-label="Volume meditazione"
-                        onChange={handleVolumeChange}
-                        onClick={event => event.stopPropagation()}
-                      />
-                    </div>
-                  </div>
-
-                  <div className={styles.progressRow}>
                     <input
                       className={styles.progressSlider}
                       type="range"

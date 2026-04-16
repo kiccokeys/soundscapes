@@ -11,7 +11,7 @@
   border: none;
   border-radius: 8px;
   overflow: hidden;
-  transition: 0.2s;
+  transition: background 0.2s, outline 0.2s, opacity 0.2s, transform 0.2s;
 
   &:focus-visible {
     outline: 2px solid var(--color-neutral-400);
@@ -208,6 +208,19 @@
   &.selected .label {
     opacity: 1;
   }
+}
+
+.soundInDrawer {
+  box-sizing: border-box;
+  align-self: stretch;
+  height: 100%;
+  min-height: 104px;
+  transition:
+    background 0.2s,
+    outline 0.2s,
+    opacity 0.2s,
+    transform 0.2s,
+    min-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @keyframes sound-meter-pulse {

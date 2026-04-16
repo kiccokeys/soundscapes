@@ -17,12 +17,23 @@ import { useKeyboardButton } from '@/hooks/use-keyboard-button';
 interface SoundProps extends SoundType {
   functional: boolean;
   hidden: boolean;
+  inDrawer?: boolean;
   selectHidden: (key: string) => void;
   unselectHidden: (key: string) => void;
 }
 
 export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
-  { functional, hidden, icon, id, label, selectHidden, src, unselectHidden },
+  {
+    functional,
+    hidden,
+    icon,
+    id,
+    inDrawer = false,
+    label,
+    selectHidden,
+    src,
+    unselectHidden,
+  },
   ref,
 ) {
   const isPlaying = useSoundStore(state => state.isPlaying);
@@ -94,6 +105,7 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
       tabIndex={0}
       className={cn(
         styles.sound,
+        inDrawer && styles.soundInDrawer,
         isSelected && styles.selected,
         hidden && styles.hidden,
       )}

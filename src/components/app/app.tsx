@@ -1,11 +1,12 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { useShallow } from 'zustand/react/shallow';
-import { BiSolidHeart } from 'react-icons/bi/index';
 import { Howler } from 'howler';
 
 import { useSoundStore } from '@/stores/sound';
 
+import { useMediaQuery } from '@/hooks/use-media-query';
 import { StoreConsumer } from '@/components/store-consumer';
+import { SoundscapeDrawer } from '@/components/soundscape-drawer';
 import { Sounds } from '@/components/sounds';
 import { MeditationPlayer } from '@/components/meditation-player';
 import { SharedModal } from '@/components/modals/shared';
@@ -15,6 +16,7 @@ import { MediaControls } from '@/components/media-controls';
 
 import styles from './app.module.css';
 
+import { cn } from '@/helpers/styles';
 import { sounds } from '@/data/sounds';
 import { FADE_OUT } from '@/constants/events';
 
@@ -85,28 +87,51 @@ export function App() {
     return [...uniqueFavorites, ...baseSounds];
   }, [favoriteSounds, categories]);
 
+  const isMdDown = useMediaQuery('(max-width: 768px)');
+  const [soundDrawerOpen, setSoundDrawerOpen] = useState(false);
+
   return (
     <SnackbarProvider>
       <StoreConsumer>
         <MediaControls />
         <div id="app" className={styles.appRoot}>
           <div className={styles.mainLayout}>
-            <div className={styles.centerPane}>
-              <img
-                alt="Feel Better Lab"
-                className={styles.meditationLogo}
-                src="/feel_better_lab_logo.svg"
-                width="282"
-                height="56"
-              />
+            <div
+              className={cn(
+                styles.centerPane,
+                isMdDown &&
+                  soundDrawerOpen &&
+                  styles.centerPaneMeditationDimmed,
+              )}
+            >
+              <div className={styles.meditationHeader}>
+                <img
+                  alt="Feel Better Lab"
+                  className={styles.meditationLogo}
+                  src="/feel_better_lab_logo.svg"
+                  width="282"
+                  height="56"
+                />
+              </div>
               <MeditationPlayer />
             </div>
-            <div className={styles.soundscapeColumnSpacer}>
-              <div className={styles.leftPane}>
-                <Sounds functional id="all" sounds={allSounds} />
+            {!isMdDown ? (
+              <div className={styles.soundscapeColumnSpacer}>
+                <div className={styles.leftPane}>
+                  <Sounds functional id="all" sounds={allSounds} />
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
+          {isMdDown ? (
+            <SoundscapeDrawer
+              onClose={() => setSoundDrawerOpen(false)}
+              onOpen={() => setSoundDrawerOpen(true)}
+              open={soundDrawerOpen}
+            >
+              <Sounds functional id="all" layout="drawer" sounds={allSounds} />
+            </SoundscapeDrawer>
+          ) : null}
         </div>
 
         <Toolbar />

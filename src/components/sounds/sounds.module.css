@@ -2,6 +2,25 @@
   width: 100%;
 }
 
+.wrapDrawer {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+}
+
+.wrapDrawer .sounds {
+  flex: 1 1 auto;
+  width: 100%;
+  min-height: 100%;
+  margin-top: 0;
+  align-content: stretch;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-auto-rows: minmax(104px, 1fr);
+}
+
 .sounds {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));

@@ -1,5 +1,5 @@
 .meditationPlayer {
-  margin-top: 32px;
+  margin-top: 0;
   padding: 0;
 }
 
@@ -58,12 +58,8 @@
     right: 24px;
   }
 
-  .controlsRow {
+  .transportRow {
     margin-top: 8px;
-  }
-
-  .progressRow {
-    margin-top: 6px;
   }
 }
 
@@ -77,13 +73,16 @@
   background: #ffffff;
 }
 
-.trackCardActive .trackTitle {
+.trackCardActive .trackLine {
   color: #0f172a;
-  opacity: 1;
 }
 
-.trackCardActive .trackMeta {
-  color: #475569;
+.trackCardActive .trackLine:first-child {
+  opacity: 0.78;
+}
+
+.trackCardActive .trackLine:last-child {
+  opacity: 1;
 }
 
 .trackCardActive .controlButton {
@@ -163,7 +162,22 @@
   gap: 12px;
 }
 
-.trackTitle {
+.trackText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35em;
+}
+
+.trackCard:not(.trackCardActive) .trackLine:first-child {
+  opacity: 0.68;
+}
+
+.trackCard:not(.trackCardActive) .trackLine:last-child {
+  opacity: 0.82;
+}
+
+/* Tipologia (riga 1) + nome pratica (riga 2): stesso font; tutto maiuscolo */
+.trackLine {
   font-family: var(--font-heading);
   font-size: calc(var(--font-2xsm) * 0.88);
   font-weight: 600;
@@ -174,29 +188,29 @@
   transition: opacity 0.15s;
 }
 
-.trackCard:not(.trackCardActive) .trackTitle {
-  opacity: 0.82;
-}
-
-.trackMeta {
-  margin-top: 2px;
-  font-size: calc(var(--font-2xsm) * 0.82);
-  color: var(--color-foreground-subtle);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.controlsRow {
+/* Play, riavvia, barra posizione e tempo sulla stessa riga */
+.transportRow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
   margin-top: 10px;
+  flex-wrap: nowrap;
+}
+
+.transportRow .progressSlider {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.transportRow .progressTime {
+  flex-shrink: 0;
 }
 
 .buttons {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   gap: 10px;
 }
@@ -294,13 +308,6 @@
   margin-top: 8px;
   font-size: var(--font-xsm);
   color: var(--color-foreground-subtle);
-}
-
-.progressRow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 8px;
 }
 
 .progressSlider {

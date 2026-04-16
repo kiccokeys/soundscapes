@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 
 import { Sound } from './sound';
+import { cn } from '@/helpers/styles';
+
 import styles from './sounds.module.css';
 
 import type { Sounds } from '@/data/types';
@@ -9,13 +11,17 @@ interface SoundsProps {
   functional: boolean;
   id: string;
   sounds: Sounds;
+  /** Pannello mobile nel drawer: griglia compatta senza min-height viewport */
+  layout?: 'default' | 'drawer';
 }
 
-export function Sounds({ functional, id, sounds }: SoundsProps) {
+export function Sounds({ functional, id, layout = 'default', sounds }: SoundsProps) {
   const firstNewSound = useRef<HTMLDivElement>(null);
 
   return (
-    <div className={styles.wrap}>
+    <div
+      className={cn(styles.wrap, layout === 'drawer' && styles.wrapDrawer)}
+    >
       <div className={styles.sounds}>
         {sounds.map((sound, index) => (
           <Sound
@@ -23,6 +29,7 @@ export function Sounds({ functional, id, sounds }: SoundsProps) {
             {...sound}
             functional={functional}
             hidden={false}
+            inDrawer={layout === 'drawer'}
             ref={index === 6 ? firstNewSound : undefined}
             selectHidden={() => {}}
             unselectHidden={() => {}}

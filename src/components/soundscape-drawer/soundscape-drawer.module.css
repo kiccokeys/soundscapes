@@ -1,0 +1,133 @@
+.root {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: 0;
+  left: max(14px, env(safe-area-inset-left));
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  pointer-events: none;
+}
+
+.root > * {
+  pointer-events: auto;
+}
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px 20px 0 0;
+  /* Chiuso (solo peek): quasi nero, ben opaco */
+  background: rgb(12 12 14 / 94%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-bottom: none;
+  box-shadow: 0 -10px 36px rgb(0 0 0 / 55%);
+  backdrop-filter: blur(14px);
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    backdrop-filter 0.3s ease;
+}
+
+/* Aperto: vetro più leggibile sulle card */
+.sheetOpen {
+  min-height: 80vh;
+  max-height: 100dvh;
+  background: rgb(0 0 0 / 48%);
+  border-color: rgb(255 255 255 / 12%);
+  box-shadow: 0 -8px 32px rgb(0 0 0 / 35%);
+  backdrop-filter: blur(10px);
+}
+
+.peekRow {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 58px;
+  padding: 18px 22px;
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font: inherit;
+  color: var(--color-foreground);
+  text-align: left;
+  border-radius: 20px 20px 0 0;
+  transition: background 0.15s;
+}
+
+.peekRow:hover:not(:disabled) {
+  background: rgb(255 255 255 / 6%);
+}
+
+.peekRow:focus-visible {
+  outline: 2px solid var(--color-neutral-400);
+  outline-offset: -2px;
+}
+
+.peekTitle {
+  flex: 1;
+  font-family: var(--font-heading);
+  font-size: var(--font-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.closeBtn {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: -10px -10px -10px 0;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-foreground);
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.35rem;
+  line-height: 0;
+  transition: background 0.15s;
+}
+
+.closeBtn:hover {
+  background: rgb(255 255 255 / 10%);
+}
+
+.closeBtn:focus-visible {
+  outline: 2px solid var(--color-neutral-400);
+  outline-offset: 2px;
+}
+
+.body {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.bodyOpen {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  max-height: none;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.bodyInner {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-height: calc(80vh - 6rem);
+  padding: 8px 22px 24px;
+  padding-bottom: max(24px, env(safe-area-inset-bottom));
+}

@@ -104,7 +104,7 @@ void main() {
   float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
   height = exp(height);
   height = (uvY * 2.0 - height + 0.2);
-  float intensity = 0.6 * height;
+  float intensity = 0.78 * height;
 
   float midPoint = 0.20;
   float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
@@ -127,8 +127,8 @@ const DEFAULT_STOPS = ['#5227FF', '#7cff67', '#5227FF'];
 type AuroraBoost = { ampMul: number; blendAdd: number; blendCap: number };
 
 /**
- * Su lg / laptop l’aurora WebGL risulta spesso troppo tenue (area ridotta, banda più sottile).
- * Tier più forti per risoluzioni “basse”, tier medio per FHD laptop.
+ * Su lg / laptop l’aurora WebGL risulta spesso troppo tenue (layout a due colonne, banda più sottile).
+ * Tier rinforzato per 1024–1920px; fallback per schermi molto larghi.
  */
 function getAuroraVisibilityBoost(): AuroraBoost {
   if (typeof window === 'undefined') {
@@ -139,24 +139,24 @@ function getAuroraVisibilityBoost(): AuroraBoost {
   const h = window.innerHeight;
 
   if (
-    (w >= 1024 && w <= 1600) ||
+    (w >= 1024 && w <= 1920) ||
     h <= 860 ||
     (w <= 1440 && h <= 1000)
   ) {
-    return { ampMul: 2.2, blendAdd: 0.36, blendCap: 0.92 };
+    return { ampMul: 3.45, blendAdd: 0.5, blendCap: 1 };
   }
 
   if (w <= 1920 && h <= 1080) {
-    return { ampMul: 1.8, blendAdd: 0.28, blendCap: 0.86 };
+    return { ampMul: 2.45, blendAdd: 0.38, blendCap: 0.94 };
   }
 
-  return { ampMul: 1, blendAdd: 0, blendCap: 1 };
+  return { ampMul: 1.6, blendAdd: 0.2, blendCap: 1 };
 }
 
 export function AuroraBackground({
   colorStops = DEFAULT_STOPS,
-  amplitude = 1,
-  blend = 0.5,
+  amplitude = 1.22,
+  blend = 0.58,
   speed = 1,
 }: AuroraBackgroundProps) {
   const propsRef = useRef({

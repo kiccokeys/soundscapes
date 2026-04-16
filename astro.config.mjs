@@ -4,6 +4,9 @@ import react from '@astrojs/react';
 import AstroPWA from '@vite-pwa/astro';
 
 export default defineConfig({
+  devToolbar: {
+    enabled: false,
+  },
   integrations: [
     react(),
     AstroPWA({

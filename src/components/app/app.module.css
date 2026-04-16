@@ -4,10 +4,66 @@
   box-sizing: border-box;
 }
 
+/* md e inferiori: più respiro laterale; spazio drawer soundscape */
+@media (max-width: 768px) {
+  .appRoot {
+    padding-right: 28px;
+    padding-left: 28px;
+    padding-bottom: var(--soundscape-drawer-pad, 56px);
+    transition:
+      padding-bottom 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+      padding-left 0.25s ease,
+      padding-right 0.25s ease;
+  }
+}
+
 .mainLayout {
   display: flex;
   flex-direction: column;
   gap: 24px;
+}
+
+.centerPane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .centerPane {
+    transition: opacity 0.3s ease;
+  }
+
+  /* Drawer soundscape aperto: meditazioni + logo attenuati */
+  .centerPaneMeditationDimmed {
+    opacity: 0.2;
+    pointer-events: none;
+  }
+}
+
+/* Logo sticky: le card meditazione scorrono sotto; sfondo fade dal blu pagina al trasparente */
+.meditationHeader {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding: 20px 16px 20px;
+  background: linear-gradient(
+    180deg,
+    #0e2030 0%,
+    rgb(14 32 48 / 0.82) 38%,
+    rgb(14 32 48 / 0.28) 72%,
+    transparent 100%
+  );
+}
+
+@media (max-width: 768px) {
+  .meditationHeader {
+    margin-right: -28px;
+    margin-left: -28px;
+    padding: 20px 28px 20px;
+  }
 }
 
 .meditationLogo {
@@ -69,14 +125,18 @@
   .centerPane {
     flex: 1;
     min-width: 0;
-    padding-top: 7px;
     padding-right: 36px;
     padding-left: 20px;
   }
 
+  .meditationHeader {
+    margin-left: -20px;
+    margin-right: -36px;
+    padding: 20px 20px 24px;
+  }
+
   .meditationLogo {
     width: min(100%, 260px);
-    margin: 16px 0 12px;
     opacity: 0.9;
   }
 }
