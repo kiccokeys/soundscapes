@@ -101,10 +101,10 @@ void main() {
   vec3 rampColor;
   COLOR_RAMP(colors, uv.x, rampColor);
 
-  float height = snoise(vec2(uv.x * 2.0 + uTime * 0.1, uTime * 0.25)) * 0.5 * uAmplitude;
+  float height = snoise(vec2(uv.x * 2.0 + uTime * 0.055, uTime * 0.14)) * 0.5 * uAmplitude;
   height = exp(height);
   height = (uvY * 2.0 - height + 0.2);
-  float intensity = 0.78 * height;
+  float intensity = 0.48 * height;
 
   float midPoint = 0.20;
   float auroraAlpha = smoothstep(midPoint - uBlend * 0.5, midPoint + uBlend * 0.5, intensity);
@@ -143,21 +143,21 @@ function getAuroraVisibilityBoost(): AuroraBoost {
     h <= 860 ||
     (w <= 1440 && h <= 1000)
   ) {
-    return { ampMul: 3.45, blendAdd: 0.5, blendCap: 1 };
+    return { ampMul: 2.15, blendAdd: 0.32, blendCap: 1 };
   }
 
   if (w <= 1920 && h <= 1080) {
-    return { ampMul: 2.45, blendAdd: 0.38, blendCap: 0.94 };
+    return { ampMul: 1.55, blendAdd: 0.24, blendCap: 0.94 };
   }
 
-  return { ampMul: 1.6, blendAdd: 0.2, blendCap: 1 };
+  return { ampMul: 1.12, blendAdd: 0.12, blendCap: 1 };
 }
 
 export function AuroraBackground({
   colorStops = DEFAULT_STOPS,
-  amplitude = 1.22,
-  blend = 0.58,
-  speed = 1,
+  amplitude = 0.78,
+  blend = 0.64,
+  speed = 0.38,
 }: AuroraBackgroundProps) {
   const propsRef = useRef({
     amplitude,
@@ -235,7 +235,7 @@ export function AuroraBackground({
       if (!program) return;
 
       const p = propsRef.current;
-      const timeFactor = reduceMotion ? 0.35 : t * 0.01;
+      const timeFactor = reduceMotion ? 0.22 : t * 0.01;
       program.uniforms.uTime.value = timeFactor * p.speed * 0.1;
 
       const boost = getAuroraVisibilityBoost();

@@ -11,7 +11,7 @@ export default defineConfig({
     react(),
     AstroPWA({
       manifest: {
-        background_color: '#0e2030',
+        background_color: '#061928',
         description: 'Benessere audio guidato per corpo e mente.',
         display: 'standalone',
         icons: [
@@ -26,7 +26,7 @@ export default defineConfig({
         scope: '/',
         short_name: 'FeelbetterLab',
         start_url: '/',
-        theme_color: '#0e2030',
+        theme_color: '#061928',
       },
       registerType: 'prompt',
       workbox: {

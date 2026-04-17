@@ -51,9 +51,9 @@
   padding: 20px 16px 20px;
   background: linear-gradient(
     180deg,
-    #0e2030 0%,
-    rgb(14 32 48 / 0.82) 38%,
-    rgb(14 32 48 / 0.28) 72%,
+    #061928 0%,
+    rgb(6 25 40 / 0.82) 38%,
+    rgb(6 25 40 / 0.28) 72%,
     transparent 100%
   );
 }
