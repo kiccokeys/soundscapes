@@ -18,19 +18,19 @@ const MEDITATIONS: MeditationTrack[] = [
     id: 'meditazione-1',
     title: 'Il Ritorno al Presente',
     subtitle: 'Mindfulness liv. 1',
-    file: '/sounds/meditazione.mp3',
+    file: '/sounds/mindfulness1.mp3',
   },
   {
     id: 'meditazione-2',
     title: "L'Osservatore Silenzioso",
     subtitle: 'Mindfulness liv. 2',
-    file: '/sounds/meditazione2.mp3',
+    file: '/sounds/mindfulness2.mp3',
   },
   {
     id: 'meditazione-3',
     title: 'La Coscienza Espansa',
     subtitle: 'Mindfulness liv. 3',
-    file: '/sounds/meditazione.mp3',
+    file: '/sounds/mindfulness3.mp3',
   },
   {
     id: 'meditazione-4',

@@ -9,10 +9,12 @@ import { useLoadingStore } from '@/stores/loading';
 import { cn } from '@/helpers/styles';
 
 import styles from './sound.module.css';
+import { getSoundLineArtUrl } from './sound-line-art';
 
 import type { Sound as SoundType } from '@/data/types';
 
 import { useKeyboardButton } from '@/hooks/use-keyboard-button';
+import { getAssetPath } from '@/helpers/path';
 
 interface SoundProps extends SoundType {
   functional: boolean;
@@ -96,6 +98,9 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
     toggle();
   });
 
+  const lineArtPath = getSoundLineArtUrl(id);
+  const lineArtUrl = lineArtPath ? getAssetPath(lineArtPath) : undefined;
+
   return (
     <div
       aria-label={`${label} sound`}
@@ -105,10 +110,18 @@ export const Sound = forwardRef<HTMLDivElement, SoundProps>(function Sound(
       tabIndex={0}
       className={cn(
         styles.sound,
+        lineArtUrl && styles.soundLineArtBg,
         inDrawer && styles.soundInDrawer,
         isSelected && styles.selected,
         hidden && styles.hidden,
       )}
+      style={
+        lineArtUrl
+          ? {
+              ['--sound-line-art' as string]: `url("${lineArtUrl}")`,
+            }
+          : undefined
+      }
       onClick={handleClick}
       onKeyDown={handleKeyDown}
     >
